@@ -1,0 +1,1 @@
+window.iframe = require('./')({ body: '<script type="text/javascript">alert("hi")</script>' })

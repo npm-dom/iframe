@@ -1,0 +1,12 @@
+{
+  "name": "iframe",
+  "version": "0.0.1",
+  "description": "higher level api for creating and using iframes in browsers",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:maxogden/iframe.git"
+  },
+  "engines": {
+    "node": "0.8.x"
+  }
+}
