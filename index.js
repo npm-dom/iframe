@@ -3,6 +3,8 @@ module.exports = function(opts) {
 }
 
 function IFrame(opts) {
+  if (!opts) opts = {}
+  this.opts = opts
   this.container = opts.container || document.body
   this.setHTML(opts)
 }
@@ -24,8 +26,10 @@ IFrame.prototype.remove = function() {
 
 IFrame.prototype.setHTML = function(opts) {
   opts = this.parseHTMLOptions(opts)
+  if (!opts.html) return
   this.remove()
   this.iframe = document.createElement('iframe')
+  this.iframe.setAttribute('scrolling', this.opts.scrollingDisabled ? 'no' : 'yes')
   this.iframe.style.width = '100%'
   this.iframe.style.height = '100%'
   this.iframe.style.border = '0'

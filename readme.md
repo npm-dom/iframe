@@ -30,6 +30,7 @@ you can pass this into the constructor or `setHTML`
   head: string contents for `<head>`
   html: string contents for entire iframe
   container: (constructor only) dom element to append iframe to, default = document.body
+  scrollingDisabled: (constructor only) boolean for the iframe scrolling attr
 }
 ```
 
