@@ -45,7 +45,7 @@ IFrame.prototype.setHTML = function(opts) {
   // generate HTML string
   var htmlSrc = tempIframe.outerHTML
   // insert HTML into container
-  this.container.insertAdjacentHTML('beforeend',htmlSrc)
+  this.container.insertAdjacentHTML('beforeend', htmlSrc)
   // retrieve created iframe from DOM
   var neighborIframes = this.container.querySelectorAll('iframe')
   this.iframe = neighborIframes[neighborIframes.length-1]
