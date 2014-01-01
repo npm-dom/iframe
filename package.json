@@ -13,7 +13,7 @@
     "tape": "~2.3.2"
   },
   "testling": {
-    "files": "test/*.js",
+    "files": "test.js",
     "browsers": [
       "ie/8..latest",
       "firefox/17..latest",
