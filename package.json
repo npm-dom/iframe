@@ -1,6 +1,6 @@
 {
   "name": "iframe",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "higher level api for creating and using iframes in browsers",
   "repository": {
     "type": "git",
@@ -10,7 +10,8 @@
     "node": "0.8.x"
   },
   "devDependencies": {
-    "tape": "~2.3.2"
+    "tape": "~2.3.2",
+    "domready": "~0.2.13"
   },
   "testling": {
     "files": "test.js",
