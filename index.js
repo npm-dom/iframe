@@ -40,7 +40,8 @@ IFrame.prototype.setHTML = function(opts) {
   tempIframe.sandbox = opts.sandboxAttributes.join(' ')
   // create a blob for opts.html and set as iframe `src` attribute
   var blob = new Blob([opts.html], { type: 'text/html;charset=UTF-8' })
-  var targetUrl = URL.createObjectURL(blob)
+  var U = typeof URL !== 'undefined' ? URL : webkitURL
+  var targetUrl = U.createObjectURL(blob)
   tempIframe.src = targetUrl
   // generate HTML string
   var htmlSrc = tempIframe.outerHTML
