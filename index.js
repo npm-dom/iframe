@@ -17,6 +17,7 @@ IFrame.prototype.parseHTMLOptions = function(opts) {
     if (!opts.head) opts.head = ""
     opts.html = '<!DOCTYPE html><html><head>' + opts.head + '</head><body>' + opts.body + '</body></html>'
   }
+  if (!opts.sandboxAttributes) opts.sandboxAttributes = ['allow-scripts']
   return opts
 }
 
@@ -28,14 +29,24 @@ IFrame.prototype.setHTML = function(opts) {
   opts = this.parseHTMLOptions(opts)
   if (!opts.html) return
   this.remove()
-  this.iframe = document.createElement('iframe')
-  this.iframe.setAttribute('scrolling', this.opts.scrollingDisabled ? 'no' : 'yes')
-  this.iframe.style.width = '100%'
-  this.iframe.style.height = '100%'
-  this.iframe.style.border = '0'
-  this.container.appendChild(this.iframe)
-  var content = this.iframe.contentDocument || this.iframe.contentWindow.document
-  content.open()
-  content.write(opts.html)
-  content.close()
+  // create temporary iframe for generating HTML string
+  // element is inserted into the DOM as a string so that the security policies do not interfere
+  // see: https://gist.github.com/kumavis/8202447
+  var tempIframe = document.createElement('iframe')
+  tempIframe.setAttribute('scrolling', this.opts.scrollingDisabled ? 'no' : 'yes')
+  tempIframe.style.width = '100%'
+  tempIframe.style.height = '100%'
+  tempIframe.style.border = '0'
+  tempIframe.sandbox = opts.sandboxAttributes.join(' ')
+  // create a blob for opts.html and set as iframe `src` attribute
+  var blob = new Blob([opts.html], {type: 'text/html;charset=UTF-8'})
+  var targetUrl = URL.createObjectURL(blob)
+  tempIframe.src = targetUrl
+  // generate HTML string
+  var htmlSrc = tempIframe.outerHTML
+  // insert HTML into container
+  this.container.insertAdjacentHTML('beforeend',htmlSrc)
+  // retrieve created iframe from DOM
+  var neighborIframes = this.container.querySelectorAll('iframe')
+  this.iframe = neighborIframes[neighborIframes.length-1]
 }
