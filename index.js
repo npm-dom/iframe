@@ -30,7 +30,7 @@ IFrame.prototype.setHTML = function(opts) {
   if (!opts.html) return
   this.remove()
   // create a blob for opts.html and set as iframe `src` attribute
-  var blob = new Blob([opts.html], { type: 'text/html;charset=UTF-8;' })
+  var blob = new Blob([opts.html], { encoding: 'UTF-8', type: 'text/html' })
   var U = typeof URL !== 'undefined' ? URL : webkitURL
   var targetUrl = U.createObjectURL(blob)
   // create temporary iframe for generating HTML string
