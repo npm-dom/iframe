@@ -2,7 +2,7 @@
 
 higher level api for creating and removing iframes in browsers
 
-[![browser support](https://ci.testling.com/maxogden/iframe.png)](https://ci.testling.com/maxogden/iframe)
+[![browser support](https://ci.testling.com/npm-dom/iframe.png)](https://ci.testling.com/npm-dom/iframe)
 
 [![NPM](https://nodei.co/npm/iframe.png)](https://nodei.co/npm/iframe/)
 
