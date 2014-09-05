@@ -29,20 +29,20 @@ IFrame.prototype.setHTML = function(opts) {
   opts = this.parseHTMLOptions(opts)
   if (!opts.html) return
   this.remove()
+  // create a blob for opts.html and set as iframe `src` attribute
+  var blob = new Blob([opts.html], { type: 'text/html;charset=UTF-8;' })
+  var U = typeof URL !== 'undefined' ? URL : webkitURL
+  var targetUrl = U.createObjectURL(blob)
   // create temporary iframe for generating HTML string
   // element is inserted into the DOM as a string so that the security policies do not interfere
   // see: https://gist.github.com/kumavis/8202447
   var tempIframe = document.createElement('iframe')
+  tempIframe.src = targetUrl
   tempIframe.setAttribute('scrolling', this.opts.scrollingDisabled ? 'no' : 'yes')
   tempIframe.style.width = '100%'
   tempIframe.style.height = '100%'
   tempIframe.style.border = '0'
   tempIframe.sandbox = opts.sandboxAttributes.join(' ')
-  // create a blob for opts.html and set as iframe `src` attribute
-  var blob = new Blob([opts.html], { type: 'text/html;charset=UTF-8' })
-  var U = typeof URL !== 'undefined' ? URL : webkitURL
-  var targetUrl = U.createObjectURL(blob)
-  tempIframe.src = targetUrl
   // generate HTML string
   var htmlSrc = tempIframe.outerHTML
   // insert HTML into container
