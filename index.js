@@ -27,12 +27,18 @@ IFrame.prototype.remove = function() {
 
 IFrame.prototype.setHTML = function(opts) {
   opts = this.parseHTMLOptions(opts)
-  if (!opts.html) return
+  if (!opts.html && !opts.src) return
   this.remove()
-  // create a blob for opts.html and set as iframe `src` attribute
-  var blob = new Blob([opts.html], { encoding: 'UTF-8', type: 'text/html' })
-  var U = typeof URL !== 'undefined' ? URL : webkitURL
-  var targetUrl = U.createObjectURL(blob)
+  
+  // if src is passed in use that (this mode ignores body/head/html options)
+  if (opts.src) {
+    var targetUrl = opts.src
+  } else {
+    // create a blob for opts.html and set as iframe `src` attribute
+    var blob = new Blob([opts.html], { encoding: 'UTF-8', type: 'text/html' })
+    var U = typeof URL !== 'undefined' ? URL : webkitURL
+    var targetUrl = U.createObjectURL(blob)    
+  }
   // create temporary iframe for generating HTML string
   // element is inserted into the DOM as a string so that the security policies do not interfere
   // see: https://gist.github.com/kumavis/8202447
