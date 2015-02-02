@@ -49,6 +49,7 @@ IFrame.prototype.setHTML = function(opts) {
   tempIframe.style.height = '100%'
   tempIframe.style.border = '0'
   tempIframe.sandbox = opts.sandboxAttributes.join(' ')
+  if (opts.name) tempIframe.setAttribute('name', opts.name)
   // generate HTML string
   var htmlSrc = tempIframe.outerHTML
   // insert HTML into container
