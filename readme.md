@@ -30,6 +30,7 @@ you can pass this into the constructor or `setHTML`
 
 ```
 {
+  name: name of the iframe,
   src: if src url is passed in use that (this mode ignores body/head/html options),
   body: string contents for `<body>`
   head: string contents for `<head>`
